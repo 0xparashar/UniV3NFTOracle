@@ -32,8 +32,8 @@ contract UniV3NFTOracle {
         int24 tickLower, 
         int24 tickUpper, 
         uint128 liquidity,,,
-        uint128 fee0,
-        uint128 fee1) = positionManager.positions(tokenId);
+        ,
+        ) = positionManager.positions(tokenId);
 
 
         (uint price0, uint price1) = getPrices(token0, token1);
@@ -48,9 +48,6 @@ contract UniV3NFTOracle {
             TickMath.getSqrtRatioAtTick(tickUpper),
             liquidity
         );
-
-        amount0 = amount0.add(uint256(fee0));
-        amount1 = amount1.add(uint256(fee1));
 
         return calculatePrice(amount0, amount1, token0, token1);
     }
